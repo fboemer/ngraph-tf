@@ -98,6 +98,7 @@ def build_tensorflow(venv_dir, src_dir, artifacts_dir):
         "install",
         "-U",
         "pip",
+        "setuptools",
         "six",
         "numpy",
         "wheel",
@@ -153,6 +154,7 @@ def build_tensorflow(venv_dir, src_dir, artifacts_dir):
     ])
 
     # Build the python package
+    '''
     call([
         "bazel",
         "build",
@@ -167,8 +169,10 @@ def build_tensorflow(venv_dir, src_dir, artifacts_dir):
     ])
 
     # Get the name of the TensorFlow pip package
-    tf_wheel_files = glob.glob(os.path.join(artifacts_dir, "tensorflow-*.whl"))
-    print("TF Wheel: %s" % tf_wheel_files[0])
+    #tf_wheel_files = glob.glob(os.path.join(artifacts_dir, "tensorflow-*.whl"))
+    #print("TF Wheel: %s" % tf_wheel_files[0])
+
+    '''
 
     # Now build the TensorFlow C++ library
     call(
@@ -357,7 +361,8 @@ def main():
     build_tensorflow("venv-tf-py3", "tensorflow", "artifacts")
 
     # Install tensorflow
-    cxx_abi = install_tensorflow("venv-tf-py3", "artifacts")
+    #cxx_abi = install_tensorflow("venv-tf-py3", "artifacts")
+    cxx_abi = "0"
 
     # Download nGraph
     download_repo(
